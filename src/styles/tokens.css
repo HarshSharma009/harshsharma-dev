@@ -1,0 +1,22 @@
+:root {
+  --color-bg: #0a0a0f;
+  --color-surface: #111118;
+  --color-border: #1e1e2e;
+  --color-accent: #00f5c4;
+  --color-accent-dim: #00f5c420;
+  --color-text-primary: #e8e8f0;
+  --color-text-muted: #6b6b80;
+  --color-rust: #f97316;
+  --color-go: #00add8;
+  --color-python: #3776ab;
+
+  --font-mono: "Geist Mono", "Fira Code", ui-monospace, monospace;
+  --font-serif: "Instrument Serif", Georgia, serif;
+
+  --section-gap: clamp(6rem, 12vw, 12rem);
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --duration-fast: 0.3s;
+  --duration-med: 0.6s;
+  --duration-slow: 1.2s;
+}
