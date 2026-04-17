@@ -14,8 +14,8 @@ const TERMINAL_LINES = [
   "",
   "> contact",
   `  email     ${personal.email}`,
-  `  linkedin  ${personal.linkedin.replace("https://", "")}`,
-  `  github    ${personal.github.replace("https://", "")}`,
+  `  linkedin  ${personal.linkedin.replace(/^https?:\/\/(www\.)?/, "").replace(/\/$/, "")}`,
+  `  github    ${personal.github.replace(/^https?:\/\/(www\.)?/, "").replace(/\/$/, "")}`,
   `  location  ${personal.location}`,
 ];
 

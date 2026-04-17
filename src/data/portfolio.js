@@ -4,7 +4,7 @@ export const personal = {
   subtitle: "Microservices & Distributed Systems",
   email: "harshsharma.ext@gmail.com",
   phone: "+91 93142 22527",
-  linkedin: "https://linkedin.com/in/harshsharma",
+  linkedin: "https://www.linkedin.com/in/harsh-sharma-8a850b173/",
   github: "https://github.com/HarshSharma009",
   location: "Bangalore, India",
   summary:
