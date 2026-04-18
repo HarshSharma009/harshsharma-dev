@@ -16,6 +16,19 @@ Hero (Intro) → About → Tech Stack → Experience Timeline → Projects → G
 
 Every section transitions via orchestrated scroll animations — no jarring cuts, the user feels they are scrolling through a living résumé.
 
+### 0.1 Code knowledge graph (navigation first)
+
+This repo keeps a **code-review-graph-go** SQLite graph under **`.code-review-graph/`**:
+
+| Artifact | Path | Purpose |
+|----------|------|---------|
+| Graph DB | `.code-review-graph/graph.db` | Structural index: files, symbols, calls, imports (query with the `code-review-graph` CLI or MCP tools from [code-review-graph-go](https://github.com/HarshSharma009/code-review-graph-go)) |
+| Visualization | `.code-review-graph/graph.html` | Interactive D3 force graph of the same data |
+
+**For coding agents:** Prefer the graph (search, `query_graph`, impact radius, `semantic_search_nodes`) to **locate the right file or symbol** instead of reading the whole repository. Static content and copy live in **`src/data/portfolio.js`**. UI sections live in **`src/components/sections/`** (`Hero.jsx`, `About.jsx`, `TechStack.jsx`, `Experience.jsx`, `Projects.jsx`, `GitHub.jsx`, `Contact.jsx`). App shell: **`src/App.jsx`**, **`src/main.jsx`**.
+
+**Refresh the graph** after meaningful edits (from repo root, with sibling `../code-review-graph-go` built): `npm run graph:build`. **Regenerate HTML:** `npm run graph:visualize`. **Local server:** `npm run graph:visualize:serve` then open `http://localhost:8765/graph.html` (process must stay running).
+
 ---
 
 ## 1. Tech Stack (Implementation)

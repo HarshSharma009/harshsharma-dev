@@ -1,4 +1,5 @@
-import { motion } from "framer-motion";
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
 import { Mail, MapPin } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "../ui/BrandIcons.jsx";
 import SectionWrapper from "../layout/SectionWrapper.jsx";
@@ -13,6 +14,44 @@ const cardVariants = {
     transition: { duration: 0.7, delay: i * 0.08, ease: [0.16, 1, 0.3, 1] },
   }),
 };
+
+function StatCard({ stat: s, index: i }) {
+  const cardRef = useRef(null);
+  const cardInView = useInView(cardRef, {
+    once: true,
+    amount: "some",
+    // Positive margins expand the IO root so stats still fire on phones (dynamic
+    // toolbar / safe area) where a tight -80px inset on a tiny inner node stayed "out".
+    margin: "120px 80px 160px 80px",
+  });
+
+  return (
+    <motion.div
+      ref={cardRef}
+      custom={i}
+      variants={cardVariants}
+      initial="hidden"
+      whileInView="show"
+      viewport={{ once: true, margin: "-40px" }}
+      className="group relative overflow-hidden rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)]/50 p-5 backdrop-blur-sm transition-colors duration-500 hover:border-[var(--color-accent)]/60 sm:p-6"
+    >
+      <div className="absolute -right-8 -top-8 size-24 rounded-full bg-[var(--color-accent)] opacity-[0.04] blur-2xl transition-opacity duration-500 group-hover:opacity-[0.12]" />
+      <div className="relative">
+        <div className="font-mono text-3xl font-semibold tracking-tight text-[var(--color-text-primary)] sm:text-4xl">
+          <CountUp
+            value={s.value}
+            suffix={s.suffix}
+            decimals={s.decimals || 0}
+            startWhen={cardInView}
+          />
+        </div>
+        <div className="mt-3 font-mono text-[11px] uppercase tracking-[0.2em] text-[var(--color-text-muted)]">
+          {s.label}
+        </div>
+      </div>
+    </motion.div>
+  );
+}
 
 const CONTACTS = [
   {
@@ -86,29 +125,7 @@ export default function About() {
 
         <div className="grid grid-cols-2 gap-4">
           {stats.map((s, i) => (
-            <motion.div
-              key={s.label}
-              custom={i}
-              variants={cardVariants}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true, margin: "-80px" }}
-              className="group relative overflow-hidden rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)]/50 p-5 backdrop-blur-sm transition-colors duration-500 hover:border-[var(--color-accent)]/60 sm:p-6"
-            >
-              <div className="absolute -right-8 -top-8 size-24 rounded-full bg-[var(--color-accent)] opacity-[0.04] blur-2xl transition-opacity duration-500 group-hover:opacity-[0.12]" />
-              <div className="relative">
-                <div className="font-mono text-3xl font-semibold tracking-tight text-[var(--color-text-primary)] sm:text-4xl">
-                  <CountUp
-                    value={s.value}
-                    suffix={s.suffix}
-                    decimals={s.decimals || 0}
-                  />
-                </div>
-                <div className="mt-3 font-mono text-[11px] uppercase tracking-[0.2em] text-[var(--color-text-muted)]">
-                  {s.label}
-                </div>
-              </div>
-            </motion.div>
+            <StatCard key={s.label} stat={s} index={i} />
           ))}
         </div>
       </div>

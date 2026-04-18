@@ -26,3 +26,7 @@ dist-ssr
 # Smoke test artifacts
 smoke-shots/
 smoke.mjs
+.vercel
+
+# code-review-graph-go (SQLite graph + D3 visualization)
+.code-review-graph/

@@ -8,7 +8,10 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "graph:build": "../code-review-graph-go/bin/code-review-graph build --repo .",
+    "graph:visualize": "../code-review-graph-go/bin/code-review-graph visualize --repo .",
+    "graph:visualize:serve": "../code-review-graph-go/bin/code-review-graph visualize --repo . --serve"
   },
   "dependencies": {
     "framer-motion": "^12.38.0",

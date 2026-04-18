@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { useInView } from "framer-motion";
+import { useInView, useReducedMotion } from "framer-motion";
 
 const easeOutExpo = (t) => (t === 1 ? 1 : 1 - Math.pow(2, -10 * t));
 
@@ -9,13 +9,21 @@ export default function CountUp({
   duration = 1600,
   decimals = 0,
   className = "",
+  /** When set, animation starts from this flag instead of observing the inner span (fixes mobile IO on small targets). */
+  startWhen,
 }) {
   const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-80px" });
+  const selfInView = useInView(ref, { once: true, margin: "0px" });
+  const active = startWhen !== undefined ? startWhen : selfInView;
+  const reduceMotion = useReducedMotion();
   const [display, setDisplay] = useState(0);
 
   useEffect(() => {
-    if (!inView) return;
+    if (reduceMotion === true) {
+      setDisplay(value);
+      return;
+    }
+    if (!active) return;
     let raf;
     const start = performance.now();
     const tick = (now) => {
@@ -27,14 +35,14 @@ export default function CountUp({
     };
     raf = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(raf);
-  }, [inView, value, duration]);
+  }, [active, value, duration, reduceMotion]);
 
   const formatted = decimals
     ? display.toFixed(decimals)
     : Math.round(display).toLocaleString();
 
   return (
-    <span ref={ref} className={`tabular-nums ${className}`}>
+    <span ref={startWhen === undefined ? ref : undefined} className={`tabular-nums ${className}`}>
       {formatted}
       {suffix}
     </span>
