@@ -1,5 +1,5 @@
-import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion } from "framer-motion";
+import { useStatsGridRevealed } from "../../hooks/useStatsGridRevealed.js";
 import { Mail, MapPin } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "../ui/BrandIcons.jsx";
 import SectionWrapper from "../layout/SectionWrapper.jsx";
@@ -39,14 +39,7 @@ const CONTACTS = [
 ];
 
 export default function About() {
-  // One observer on a plain wrapper — avoids WebKit issues when ref + useInView
-  // share the same motion.div as whileInView (first tile could stay "not in view").
-  const statsGridRef = useRef(null);
-  const statsInView = useInView(statsGridRef, {
-    once: true,
-    amount: "some",
-    margin: "100px",
-  });
+  const [statsGridRef, statsInView] = useStatsGridRevealed();
 
   return (
     <SectionWrapper id="about" label="01 · About" title="Backend engineer obsessed with resilient systems.">
