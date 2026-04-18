@@ -15,44 +15,6 @@ const cardVariants = {
   }),
 };
 
-function StatCard({ stat: s, index: i }) {
-  const cardRef = useRef(null);
-  const cardInView = useInView(cardRef, {
-    once: true,
-    amount: "some",
-    // Positive margins expand the IO root so stats still fire on phones (dynamic
-    // toolbar / safe area) where a tight -80px inset on a tiny inner node stayed "out".
-    margin: "120px 80px 160px 80px",
-  });
-
-  return (
-    <motion.div
-      ref={cardRef}
-      custom={i}
-      variants={cardVariants}
-      initial="hidden"
-      whileInView="show"
-      viewport={{ once: true, margin: "-40px" }}
-      className="group relative overflow-hidden rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)]/50 p-5 backdrop-blur-sm transition-colors duration-500 hover:border-[var(--color-accent)]/60 sm:p-6"
-    >
-      <div className="absolute -right-8 -top-8 size-24 rounded-full bg-[var(--color-accent)] opacity-[0.04] blur-2xl transition-opacity duration-500 group-hover:opacity-[0.12]" />
-      <div className="relative">
-        <div className="font-mono text-3xl font-semibold tracking-tight text-[var(--color-text-primary)] sm:text-4xl">
-          <CountUp
-            value={s.value}
-            suffix={s.suffix}
-            decimals={s.decimals || 0}
-            startWhen={cardInView}
-          />
-        </div>
-        <div className="mt-3 font-mono text-[11px] uppercase tracking-[0.2em] text-[var(--color-text-muted)]">
-          {s.label}
-        </div>
-      </div>
-    </motion.div>
-  );
-}
-
 const CONTACTS = [
   {
     icon: Mail,
@@ -77,6 +39,15 @@ const CONTACTS = [
 ];
 
 export default function About() {
+  // One observer on a plain wrapper — avoids WebKit issues when ref + useInView
+  // share the same motion.div as whileInView (first tile could stay "not in view").
+  const statsGridRef = useRef(null);
+  const statsInView = useInView(statsGridRef, {
+    once: true,
+    amount: "some",
+    margin: "100px",
+  });
+
   return (
     <SectionWrapper id="about" label="01 · About" title="Backend engineer obsessed with resilient systems.">
       <div className="grid grid-cols-1 gap-12 lg:grid-cols-[1.1fr_1fr] lg:gap-16">
@@ -123,9 +94,32 @@ export default function About() {
           </ul>
         </div>
 
-        <div className="grid grid-cols-2 gap-4">
+        <div ref={statsGridRef} className="grid grid-cols-2 gap-4">
           {stats.map((s, i) => (
-            <StatCard key={s.label} stat={s} index={i} />
+            <motion.div
+              key={s.label}
+              custom={i}
+              variants={cardVariants}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, margin: "-40px" }}
+              className="group relative overflow-hidden rounded-xl border border-[var(--color-border)] bg-[var(--color-surface)]/50 p-5 backdrop-blur-sm transition-colors duration-500 hover:border-[var(--color-accent)]/60 sm:p-6"
+            >
+              <div className="absolute -right-8 -top-8 size-24 rounded-full bg-[var(--color-accent)] opacity-[0.04] blur-2xl transition-opacity duration-500 group-hover:opacity-[0.12]" />
+              <div className="relative">
+                <div className="font-mono text-3xl font-semibold tracking-tight text-[var(--color-text-primary)] sm:text-4xl">
+                  <CountUp
+                    value={s.value}
+                    suffix={s.suffix}
+                    decimals={s.decimals || 0}
+                    startWhen={statsInView}
+                  />
+                </div>
+                <div className="mt-3 font-mono text-[11px] uppercase tracking-[0.2em] text-[var(--color-text-muted)]">
+                  {s.label}
+                </div>
+              </div>
+            </motion.div>
           ))}
         </div>
       </div>
