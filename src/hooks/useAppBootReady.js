@@ -1,6 +1,6 @@
 import { useLayoutEffect, useState } from "react";
 
-const MIN_VISIBLE_MS = 1100;
+const MIN_VISIBLE_MS = 2000;
 
 /**
  * Resolves when fonts + a short minimum delay have passed and layout has had
