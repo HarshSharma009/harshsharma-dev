@@ -22,7 +22,7 @@ This repo keeps a **code-review-graph-go** SQLite graph under **`.code-review-gr
 
 | Artifact | Path | Purpose |
 |----------|------|---------|
-| Graph DB | `.code-review-graph/graph.db` | Structural index: files, symbols, calls, imports (query with the `code-review-graph` CLI or MCP tools from [code-review-graph-go](https://github.com/HarshSharma009/code-review-graph-go)) |
+| Graph DB | `.code-review-graph/graph.db` | Structural index: files, symbols, calls, imports (query with the `code-review-graph` CLI or MCP tools from [code-review-graph-go](https://github.com/harshsh-dev/code-review-graph-go)) |
 | Visualization | `.code-review-graph/graph.html` | Interactive D3 force graph of the same data |
 
 **For coding agents:** Prefer the graph (search, `query_graph`, impact radius, `semantic_search_nodes`) to **locate the right file or symbol** instead of reading the whole repository. Static content and copy live in **`src/data/portfolio.js`**. UI sections live in **`src/components/sections/`** (`Hero.jsx`, `About.jsx`, `TechStack.jsx`, `Experience.jsx`, `Projects.jsx`, `GitHub.jsx`, `Contact.jsx`). App shell: **`src/App.jsx`**, **`src/main.jsx`**.
@@ -140,7 +140,7 @@ export const personal = {
   email: "harshsharma.ext@gmail.com",
   phone: "+91 93142 22527",
   linkedin: "https://linkedin.com/in/harshsharma",
-  github: "https://github.com/HarshSharma009",
+  github: "https://github.com/harshsh-dev",
   location: "Bangalore, India",
   summary: "Backend Engineer with 5+ years designing high-throughput, resilient distributed systems in fintech and banking. Building production-grade microservices serving millions of transactions daily.",
 };
@@ -243,7 +243,7 @@ export const projects = [
     title: "Stock Price Predictor",
     description: "Django + LSTM neural network web app forecasting stock prices from 5 years of historical data.",
     tags: ["Python", "Django", "LSTM", "TensorFlow"],
-    github: "https://github.com/HarshSharma009/StockMarketPredictor",
+    github: "https://github.com/harshsh-dev/StockMarketPredictor",
     icon: "📈",
   },
   {
@@ -259,12 +259,12 @@ export const projects = [
     title: "Code Review Graph",
     description: "Graph-based code review tool in Go — visualise code review dependencies and relationships.",
     tags: ["Go", "Graph Theory"],
-    github: "https://github.com/HarshSharma009/code-review-graph-go",
+    github: "https://github.com/harshsh-dev/code-review-graph-go",
     icon: "🔗",
   },
 ];
 
-export const githubUsername = "HarshSharma009";
+export const githubUsername = "harshsh-dev";
 ```
 
 ---
@@ -388,7 +388,7 @@ const scaleY = useTransform(scrollYProgress, [0, 1], [0, 1]);
 **Data fetching** (`src/hooks/useGitHub.js`):
 ```js
 const GITHUB_API = "https://api.github.com";
-const USERNAME = "HarshSharma009";
+const USERNAME = "harshsh-dev";
 
 export async function fetchRepos() {
   // Check localStorage cache first (1hr TTL)
@@ -410,13 +410,13 @@ export async function fetchRepos() {
 ```jsx
 // Option A: ghchart.rshah.org SVG embed
 <img
-  src="https://ghchart.rshah.org/00F5C4/HarshSharma009"
+  src="https://ghchart.rshah.org/00F5C4/harshsh-dev"
   alt="Harsh Sharma GitHub contribution graph"
   style={{ width: "100%", filter: "brightness(0.9)" }}
 />
 
 // Option B: github-readme-stats
-<img src="https://github-readme-stats.vercel.app/api?username=HarshSharma009&theme=dark&hide_border=true" />
+<img src="https://github-readme-stats.vercel.app/api?username=harshsh-dev&theme=dark&hide_border=true" />
 ```
 
 **Layout**:
@@ -441,7 +441,7 @@ export async function fetchRepos() {
 > contact
   harshsharma.ext@gmail.com
   linkedin.com/in/harshsharma
-  github.com/HarshSharma009
+  github.com/harshsh-dev
 > _
 ```
 
@@ -616,7 +616,7 @@ Use these when building section by section with Claude Code:
 > Build `src/components/sections/Experience.jsx`. Render `experience[]` from `portfolio.js` as a vertical timeline. Centred spine line uses `useScroll` + `useTransform` to `scaleY` from 0→1 as user scrolls through section. Cards alternate left/right on desktop (`>1024px`), single column on mobile. Each card uses its `color` field for accent. Current role (id: "idfc") shows blinking `CURRENT` badge.
 
 **GitHub section:**
-> Build `src/components/sections/GitHub.jsx`. Use the `useGitHub` hook to fetch repos for `HarshSharma009` from GitHub REST API with localStorage caching (1hr TTL). Display top 4 repos as cards. Embed contribution heatmap as `<img src="https://ghchart.rshah.org/00F5C4/HarshSharma009">`. Stagger repo cards in with `whileInView`.
+> Build `src/components/sections/GitHub.jsx`. Use the `useGitHub` hook to fetch repos for `harshsh-dev` from GitHub REST API with localStorage caching (1hr TTL). Display top 4 repos as cards. Embed contribution heatmap as `<img src="https://ghchart.rshah.org/00F5C4/harshsh-dev">`. Stagger repo cards in with `whileInView`.
 
 **Tech Stack:**
 > Build `src/components/sections/TechStack.jsx`. Top row: language cards for Python/Rust/Go/Java with animated skill bars (`whileInView` width animation). Below: badge tag clouds grouped by category (Distributed, Cloud, Databases, Observability, Frameworks) from `portfolio.js`. Badge hover: `scale(1.05)` + `--color-accent` border glow.
@@ -644,4 +644,4 @@ Use these when building section by section with Claude Code:
 ---
 
 *Generated for Harsh Sharma's portfolio build — April 2026*
-*GitHub: github.com/HarshSharma009*
+*GitHub: github.com/harshsh-dev*

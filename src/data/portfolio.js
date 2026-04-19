@@ -5,7 +5,7 @@ export const personal = {
   email: "harshsharma.ext@gmail.com",
   phone: "+91 93142 22527",
   linkedin: "https://www.linkedin.com/in/harsh-sharma-8a850b173/",
-  github: "https://github.com/HarshSharma009",
+  github: "https://github.com/harshsh-dev",
   location: "Bangalore, India",
   summary:
     "Backend Engineer with 5+ years designing high-throughput, resilient distributed systems in fintech and banking. Building production-grade microservices serving millions of transactions daily.",
@@ -167,7 +167,7 @@ export const projects = [
     description:
       "Django + LSTM neural network web app forecasting stock prices from 5 years of historical data.",
     tags: ["Python", "Django", "LSTM", "TensorFlow"],
-    github: "https://github.com/HarshSharma009/StockMarketPredictor",
+    github: "https://github.com/harshsh-dev/StockMarketPredictor",
     icon: "TrendingUp",
     accent: "#3776AB",
   },
@@ -187,13 +187,13 @@ export const projects = [
     description:
       "Graph-based code review tool in Go — visualise code review dependencies and relationships.",
     tags: ["Go", "Graph Theory"],
-    github: "https://github.com/HarshSharma009/code-review-graph-go",
+    github: "https://github.com/harshsh-dev/code-review-graph-go",
     icon: "Share2",
     accent: "#00ADD8",
   },
 ];
 
-export const githubUsername = "HarshSharma009";
+export const githubUsername = "harshsh-dev";
 
 export const navSections = [
   { id: "hero", label: "Home" },
